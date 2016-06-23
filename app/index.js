@@ -1,8 +1,6 @@
 var React = require('react'),
     ReactDOM = require('react-dom');
 
-// var AnswerRadioInput = require('./answerRadioInput');
-
 function uniqueId(prefix) {
     return prefix + Math.floor(Math.random() * 1000);
 }
