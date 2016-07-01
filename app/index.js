@@ -2,23 +2,37 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import marked from 'marked';
 
-import App from './components/AppRedux';
 import action from './action/action';
 import store from './store/store';
 
-// import dispatcher from './dispatcher/dispatcher';
+/************/
+/*** Flux ***/
+/************/
+import App from './components/App';
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import dispatcher from './dispatcher/dispatcher';
 
-// action.bindDispatch(dispatcher);
-// store.registerDispatcher(dispatcher);
-
-var reduxStore = createStore(store.getReducer());
+action.register(dispatcher);
+store.register(dispatcher);
 
 ReactDOM.render(
-	<Provider store={reduxStore}>
-    	<App />
-    </Provider>,
+    <App />,
     document.getElementById("mybody")
 );
+
+/*************/
+/*** Redux ***/
+/*************/
+// import App from './components/AppRedux';
+
+// import { createStore } from 'redux';
+// import { Provider } from 'react-redux';
+
+// var reduxStore = createStore(store.reduxReducer);
+
+// ReactDOM.render(
+//     <Provider store={reduxStore}>
+//         <App />
+//     </Provider>,
+//     document.getElementById("mybody")
+// );

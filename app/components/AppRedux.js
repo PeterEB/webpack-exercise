@@ -1,16 +1,15 @@
 import React from 'react';
-import action from '../action/action';
-import store from '../store/store';
-
-import { bindActionCreators } from 'redux';
+import { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { add } from '../action/action';
+
 var App = React.createClass({
-    handleClick: function () {
-        action.add(1);
+    propTypes: {
+        add: PropTypes.func.isRequired
     },
-    _onChange: function() {
-        this.setState(store.getState());
+    handleClick: function () {
+        this.props.add(1);
     },
     render: function () {
         return (
@@ -23,15 +22,12 @@ var App = React.createClass({
 })
 
 function mapStateToProps(state) {
-console.log('app' + state);
-  return {
-    number: state.number
-  }
+    return {
+        number: state.number
+    }
 }
 
-// module.exports = App;
-
 export default connect(
-  mapStateToProps,
-  { action }
+    mapStateToProps,
+    { add }
 )(App)

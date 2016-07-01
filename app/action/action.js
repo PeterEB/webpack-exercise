@@ -1,27 +1,26 @@
 // import actionType from '../actionType';
 
 var appAction = {
-    dispatcher: null,
+    _dispatcher: null,
 
-    bindDispatch: function (dispatcher) {
-        this.dispatcher = dispatcher;
+    register: function (dispatcher) {
+        appAction._dispatcher = dispatcher;
     },
 
     add: function (number) {
-        if (this.dispatcher) {
-            this.dispatcher.dispatch({
-                type: 'ADD',
-                number: number
-            });
-        } else {
-            return function (dispatch) {
-                dispatch({
-                    type: 'ADD',
-                    number: number 
-                });
-            };
-        }
+        return determine({
+            type: 'ADD',
+            number: number
+        });
     }
 };
+
+function determine(data) {
+    if(appAction._dispatcher) {
+        appAction._dispatcher.dispatch(data);
+    } else {
+        return data;
+    }
+}
 
 module.exports = appAction;
